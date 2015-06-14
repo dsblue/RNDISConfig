@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RNDISConfig.iml" filepath="$PROJECT_DIR$/RNDISConfig.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rndis/rndis.iml" filepath="$PROJECT_DIR$/rndis/rndis.iml" />
+    </modules>
+  </component>
+</project>
