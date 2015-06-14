@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:digits="0123456789."
-            android:id="@+id/editIPAddress" android:hint="10.0.0.1"/>
+            android:id="@+id/editIPAddress"
+            android:hint="@string/ip_hint"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,11 +33,14 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:digits="0123456789."
-            android:id="@+id/editIPMask" android:hint="255.0.0.0"/>
+            android:id="@+id/editIPMask"
+            android:hint="@string/mask_hint"/>
     <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RNDIS Mode"
-            android:id="@+id/rndis_switch" android:layout_gravity="center_horizontal" android:checked="false"/>
+            android:id="@+id/rndis_switch"
+            android:layout_gravity="center_horizontal"
+            android:checked="false"/>
 </LinearLayout>
 

@@ -3,4 +3,6 @@
     <string name="app_name">RNDIS Configuration</string>
     <string name="usageTest">The following values are used as the RNDIS network interface values.</string>
     <string name="action_settings">Settings</string>
+    <string name="ip_hint">10.0.0.1</string>
+    <string name="mask_hint">255.0.0.0</string>
 </resources>
