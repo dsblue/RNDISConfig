@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RNDIS Config</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">RNDIS Configuration</string>
+    <string name="usageTest">The following values are used as the RNDIS network interface values.</string>
     <string name="action_settings">Settings</string>
 </resources>
