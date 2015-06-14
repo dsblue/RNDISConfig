@@ -7,9 +7,10 @@
     <string name="mask_hint">255.0.0.0</string>
 
     <string-array name="host_types">
-        <item>Windows 7</item>
-        <item>Mac OSX 10.0</item>
-        <item>Ubuntu 14.04</item>
+        <item>TrellisWare CUB</item>
+        <item>Windows 7 ICS (Static IP)</item>
+        <item>Windows 7 ICS (DHCP)</item>
+        <item>Ubuntu</item>
     </string-array>
 
 </resources>

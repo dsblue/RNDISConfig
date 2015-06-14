@@ -11,7 +11,7 @@ import android.widget.*;
 
 import java.io.*;
 
-public class RNDIS extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RNDIS extends AppCompatActivity {
 
     private static final String INTERFACE = "rndis0";
 
@@ -146,17 +146,52 @@ public class RNDIS extends AppCompatActivity implements AdapterView.OnItemSelect
     private void InitializeApp()
     {
         final SharedPreferences myPrefs = this.getSharedPreferences("Prefs", MODE_PRIVATE);
+
         final EditText ip = (EditText) findViewById(R.id.editIPAddress);
         final EditText mask = (EditText) findViewById(R.id.editIPMask);
+        final TextView ipText = (TextView) findViewById(R.id.textIPAddress);
+        final TextView maskText = (TextView) findViewById(R.id.textIPMask);
+        final Button buttonDHCP = (Button) findViewById(R.id.buttonDhcp);
+        final Spinner hosts = (Spinner) findViewById(R.id.spinnerHosts);
+        final Switch enable = (Switch) findViewById(R.id.rndis_switch);
 
         // Populate Common Host types
-        Spinner hosts = (Spinner) findViewById(R.id.spinnerHosts);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.host_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hosts.setAdapter(adapter);
 
-        hosts.setOnItemSelectedListener(this);
+        hosts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selection = parent.getItemAtPosition(position).toString();
+
+                if (selection.equals("TrellisWare CUB")) {
+                    buttonDHCP.setVisibility(View.GONE);
+                    ip.setVisibility(View.VISIBLE);
+                    ipText.setVisibility(View.VISIBLE);
+                    mask.setVisibility(View.VISIBLE);
+                    maskText.setVisibility(View.VISIBLE);
+                } else if (selection.equals("Windows 7 ICS (Static IP)")) {
+                    buttonDHCP.setVisibility(View.GONE);
+                    ip.setVisibility(View.VISIBLE);
+                    ipText.setVisibility(View.VISIBLE);
+                    mask.setVisibility(View.VISIBLE);
+                    maskText.setVisibility(View.VISIBLE);
+                } else if (selection.equals("Windows 7 ICS (DHCP)")) {
+                    buttonDHCP.setVisibility(View.VISIBLE);
+                    ip.setVisibility(View.GONE);
+                    ipText.setVisibility(View.GONE);
+                    mask.setVisibility(View.GONE);
+                    maskText.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         // Load defaults from previous run of the App
         String ipString = myPrefs.getString("ip", null);
@@ -170,7 +205,6 @@ public class RNDIS extends AppCompatActivity implements AdapterView.OnItemSelect
             mask.setText(maskString);
         }
 
-        Switch enable = (Switch) findViewById(R.id.rndis_switch);
         String mode = getUsbMode();
         if (mode.toLowerCase().contains("rndis")) {
             // In RNDIS mode
@@ -184,7 +218,6 @@ public class RNDIS extends AppCompatActivity implements AdapterView.OnItemSelect
         enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 // Save current entries for next run
                 SharedPreferences.Editor prefsEditor = myPrefs.edit();
                 prefsEditor.putString("ip", ip.getText().toString());
@@ -209,30 +242,12 @@ public class RNDIS extends AppCompatActivity implements AdapterView.OnItemSelect
             }
         });
 
-        Button button = (Button) findViewById(R.id.buttonDhcp);
-        button.setOnClickListener(new Button.OnClickListener() {
+        buttonDHCP.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("buttonDhcp","Attempting to probe for DHCP");
+                Log.i("buttonDhcp", "Attempting to probe for DHCP");
                 execCommandLine("netcfg " + INTERFACE + " dhcp");
             }
         });
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getItemAtPosition(position).toString().equals("Windows 7")) {
-            final EditText ip = (EditText) findViewById(R.id.editIPAddress);
-            final EditText mask = (EditText) findViewById(R.id.editIPMask);
-
-            ip.setText("192.168.2.1");
-            mask.setText("255.255.255.0");
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
