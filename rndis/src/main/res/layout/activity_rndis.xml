@@ -13,6 +13,13 @@
             android:layout_height="wrap_content"
             android:text="@string/usageTest"
             android:id="@+id/usage"/>
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerHosts"
+            android:layout_gravity="center_horizontal"
+            android:spinnerMode="dialog"
+            />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,5 +54,10 @@
             android:id="@+id/rndis_switch"
             android:layout_gravity="center_horizontal"
             android:checked="false"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Probe DHCP"
+            android:id="@+id/buttonDhcp" android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 

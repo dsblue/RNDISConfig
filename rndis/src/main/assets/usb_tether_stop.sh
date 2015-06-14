@@ -10,3 +10,5 @@ ip addr flush dev $interfaceName
 ip rule del from all lookup main
 
 setprop sys.usb.config $savedMode
+
+exit 0

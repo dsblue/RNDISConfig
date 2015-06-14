@@ -5,4 +5,11 @@
     <string name="action_help">Help</string>
     <string name="ip_hint">10.0.0.1</string>
     <string name="mask_hint">255.0.0.0</string>
+
+    <string-array name="host_types">
+        <item>Windows 7</item>
+        <item>Mac OSX 10.0</item>
+        <item>Ubuntu 14.04</item>
+    </string-array>
+
 </resources>

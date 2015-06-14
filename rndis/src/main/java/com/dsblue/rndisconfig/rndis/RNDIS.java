@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.*;
 
 import java.io.*;
 
-public class RNDIS extends AppCompatActivity {
+public class RNDIS extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String INTERFACE = "rndis0";
 
@@ -148,6 +149,15 @@ public class RNDIS extends AppCompatActivity {
         final EditText ip = (EditText) findViewById(R.id.editIPAddress);
         final EditText mask = (EditText) findViewById(R.id.editIPMask);
 
+        // Populate Common Host types
+        Spinner hosts = (Spinner) findViewById(R.id.spinnerHosts);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.host_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hosts.setAdapter(adapter);
+
+        hosts.setOnItemSelectedListener(this);
+
         // Load defaults from previous run of the App
         String ipString = myPrefs.getString("ip", null);
         String maskString = myPrefs.getString("mask", null);
@@ -172,6 +182,7 @@ public class RNDIS extends AppCompatActivity {
         }
 
         enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 // Save current entries for next run
@@ -182,14 +193,46 @@ public class RNDIS extends AppCompatActivity {
 
                 // true if the switch is in the On position
                 if (isChecked) {
+                    prefsEditor.putString("orig_mode", getUsbMode());
+                    prefsEditor.apply();
                     execCommandLine("sh " +
                             usbTetherStart.getAbsolutePath() +
                             " " + ip.getText() + "/" + mask.getText() +
-                            INTERFACE);
+                            " " + INTERFACE);
                 } else {
-                    execCommandLine("sh " + usbTetherStop.getAbsolutePath() + " adb " + INTERFACE);
+                    String originalMode = myPrefs.getString("orig_mode", "adb");
+                    execCommandLine("sh " +
+                            usbTetherStop.getAbsolutePath() +
+                            " " + originalMode +
+                            " " + INTERFACE);
                 }
             }
         });
+
+        Button button = (Button) findViewById(R.id.buttonDhcp);
+        button.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("buttonDhcp","Attempting to probe for DHCP");
+                execCommandLine("netcfg " + INTERFACE + " dhcp");
+            }
+        });
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (parent.getItemAtPosition(position).toString().equals("Windows 7")) {
+            final EditText ip = (EditText) findViewById(R.id.editIPAddress);
+            final EditText mask = (EditText) findViewById(R.id.editIPMask);
+
+            ip.setText("192.168.2.1");
+            mask.setText("255.255.255.0");
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
