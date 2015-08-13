@@ -2,8 +2,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".RNDIS">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_help"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+      <item android:id="@+id/action_rndis_on_boot"
+            android:title="@string/menu_rndis_on_boot"
+            android:checkable="true"
+            android:orderInCategory="10"
+            app:showAsAction="never"/>
+      <item android:id="@+id/action_settings"
+            android:title="@string/action_help"
+            android:orderInCategory="100"
+            app:showAsAction="never"/>
 </menu>

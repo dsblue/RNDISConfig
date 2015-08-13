@@ -5,6 +5,20 @@
     <string name="action_help">Help</string>
     <string name="ip_hint">10.0.0.1</string>
     <string name="mask_hint">255.0.0.0</string>
+    <string name="local_service_stopped">Service Stopped</string>
+    <string name="local_service_label">Service Label</string>
+    <string name="local_service_connected">Service Connected</string>
+    <string name="local_service_disconnected">Service Disconnected</string>
+    <string name="prefrence_file_name">Prefs</string>
+    <string name="pref_ip">ip</string>
+    <string name="pref_ip_mask">mask</string>
+    <string name="pref_on_startup">RndisOnStartup</string>
+    <string name="default_ip">10.0.0.2</string>
+    <string name="default_mask">255.0.0.0</string>
+    <string name="notification_title">RNDIS Service Started</string>
+    <string name="notification_details_rndis">Watching for RNDIS devices</string>
+    <string name="notification_details_no_rndis">Not in RNDIS mode (Click to change)</string>
+    <string name="menu_rndis_on_boot">Start RNDIS On Boot</string>
 
     <string-array name="host_types">
         <item>TrellisWare CUB</item>

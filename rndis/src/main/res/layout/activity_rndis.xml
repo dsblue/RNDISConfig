@@ -19,6 +19,7 @@
             android:id="@+id/spinnerHosts"
             android:layout_gravity="center_horizontal"
             android:spinnerMode="dialog"
+            android:visibility="gone"
             />
     <TextView
             android:layout_width="wrap_content"
@@ -29,8 +30,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:digits="0123456789."
+            android:inputType="text"
             android:id="@+id/editIPAddress"
             android:hint="@string/ip_hint"/>
     <TextView
@@ -42,14 +42,14 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:digits="0123456789."
+            android:inputType="text"
             android:id="@+id/editIPMask"
             android:hint="@string/mask_hint"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Probe DHCP"
+            android:visibility="gone"
             android:id="@+id/buttonDhcp"/>
     <Switch
             android:layout_width="wrap_content"
